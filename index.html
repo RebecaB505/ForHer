@@ -46,19 +46,6 @@
             line-height: 1.5;
             margin-bottom: 20px;
         }
-        .quiz-section input {
-            width: 80%;
-            padding: 10px;
-            margin-bottom: 15px;
-            border: 2px solid #cbd5e1;
-            border-radius: 8px;
-            font-size: 1rem;
-            text-align: center;
-            outline: none;
-        }
-        .quiz-section input:focus {
-            border-color: #1e3a8a;
-        }
         .btn {
             background: #1e3a8a;
             color: white;
@@ -76,12 +63,6 @@
         }
         .btn:active {
             transform: scale(0.95);
-        }
-        .error-msg {
-            color: #dc2626;
-            font-size: 0.9rem;
-            margin-bottom: 10px;
-            display: none;
         }
         /* Contenido Oculto de Cumpleaños */
         .birthday-content {
@@ -116,15 +97,10 @@
 <body>
 
     <div class="container">
-        <div id="quiz-screen" class="quiz-section">
+        <div id="quiz-screen">
             <h1>Acceso Restringido 🔐</h1>
-            <p>Para abrir este repositorio de manera segura, introduce la clave de acceso.</p>
-            <p style="font-size: 0.85rem; color: #64748b; font-style: italic;">
-                Pista: ¿Cuál es la canción favorita de Cesia? (Colócalo en números, todo junto)
-            </p>
-            <input type="password" id="answer-input" placeholder="••••" inputmode="numeric" pattern="[0-9]*">
-            <div id="error-message" class="error-msg">Clave incorrecta. Inténtalo de nuevo.</div>
-            <button class="btn" onclick="checkAnswer()">Desbloquear</button>
+            <p>Para abrir este repositorio de manera segura, confirma tu identidad.</p>
+            <button class="btn" onclick="revealMessage()">Si eres Cesia, da clic acá</button>
         </div>
 
         <div id="birthday-screen" class="birthday-content">
@@ -139,24 +115,16 @@
     </div>
 
     <script>
-        function checkAnswer() {
-            const input = document.getElementById('answer-input').value.trim();
-            const error = document.getElementById('error-message');
+        function revealMessage() {
+            // Ocultar pantalla de bloqueo y mostrar felicitación
+            document.getElementById('quiz-screen').style.display = 'none';
+            document.getElementById('birthday-screen').style.display = 'block';
             
-            if (input === '915') {
-                document.getElementById('quiz-screen').style.display = 'none';
-                document.getElementById('birthday-screen').style.display = 'block';
-                startStars();
-            } else {
-                error.style.display = 'block';
-                document.getElementById('answer-input').value = '';
-            }
-        }
-
-        function startStars() {
+            // Iniciar animación de estrellas instantánea
             for(let i = 0; i < 15; i++) {
                 setTimeout(createStar, i * 100);
             }
+            // Mantener lluvia constante de estrellas
             setInterval(createStar, 300);
         }
 
