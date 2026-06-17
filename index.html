@@ -122,7 +122,7 @@
             <p style="font-size: 0.85rem; color: #64748b; font-style: italic;">
                 Pista: ¿Cuál es la canción favorita de Cesia? (Colócalo en números, todo junto)
             </p>
-            <input type="password" id="answer-input" placeholder="Introduce la respuesta...">
+            <input type="password" id="answer-input" placeholder="••••" inputmode="numeric" pattern="[0-9]*">
             <div id="error-message" class="error-msg">Clave incorrecta. Inténtalo de nuevo.</div>
             <button class="btn" onclick="checkAnswer()">Desbloquear</button>
         </div>
@@ -134,4 +134,45 @@
             <div class="divider"></div>
             
             <p>A veces somos dos mundos totalmente distintos y admito que me cuesta entenderte, pero siempre vale la pena intentarlo. Incluso cuando logras hacerme enojar, me basta con ver el brillo que tienes y lo increíble que eres en cada faceta de tu vida: la hija entregada, la tía consentidora, la nieta atenta, la hermana en la que siempre se puede apoyar y la amiga incondicional.</p>
-            <p style="font-weight: bold; color: #1e3a
+            <p style="font-weight: bold; color: #1e3a8a;">Disfruta mucho tu día. Te lo mereces. 🎉</p>
+        </div>
+    </div>
+
+    <script>
+        function checkAnswer() {
+            const input = document.getElementById('answer-input').value.trim();
+            const error = document.getElementById('error-message');
+            
+            if (input === '915') {
+                document.getElementById('quiz-screen').style.display = 'none';
+                document.getElementById('birthday-screen').style.display = 'block';
+                startStars();
+            } else {
+                error.style.display = 'block';
+                document.getElementById('answer-input').value = '';
+            }
+        }
+
+        function startStars() {
+            for(let i = 0; i < 15; i++) {
+                setTimeout(createStar, i * 100);
+            }
+            setInterval(createStar, 300);
+        }
+
+        function createStar() {
+            const star = document.createElement('div');
+            star.classList.add('star');
+            star.innerHTML = Math.random() > 0.5 ? '✨' : '🌟';
+            star.style.left = Math.random() * 100 + 'vw';
+            star.style.animationDuration = (Math.random() * 2 + 3) + 's';
+            star.style.fontSize = (Math.random() * 15 + 15) + 'px';
+            document.body.appendChild(star);
+
+            setTimeout(() => {
+                star.remove();
+            }, 5000);
+        }
+    </script>
+</body>
+</html>
